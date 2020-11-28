@@ -5,7 +5,7 @@ const initialState = {
   nodeLabels: [],
   queryHistory: [],
   isPhysicsEnabled: true,
-  nodeLimit: 100,
+  nodeLimit: 20,
   networkOptions: {
     physics: {
       forceAtlas2Based: {
