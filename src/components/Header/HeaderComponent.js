@@ -12,6 +12,7 @@ class Header extends React.Component {
   }
 
   sendQuery() {
+    console.log("send query called\n");
     this.props.dispatch({ type: ACTIONS.SET_ERROR, payload: null });
     axios.post(
       QUERY_ENDPOINT,
@@ -39,15 +40,18 @@ class Header extends React.Component {
   componentWillMount () {
     const windowUrl = window.location.search;
     const params = new URLSearchParams(windowUrl);
-    console.log(params)
-    console.log(params["host"])
     this.props.dispatch({ type: ACTIONS.SET_HOST, payload: params.get('host') });
     this.props.dispatch({ type: ACTIONS.SET_PORT, payload: params.get('port') });
     this.props.dispatch({ type: ACTIONS.SET_QUERY, payload: params.get('query') });
   }
 
+  componentDidMount() {
+    setTimeout(function() {
+      this.sendQuery()
+      }.bind(this), 1000)
+  }
+
   render(){
-    this.sendQuery()
     return (
       <div className={'header'}>
         <form noValidate autoComplete="off">
