@@ -1,5 +1,6 @@
 # Gremlin-Visualizer
 This project is to visualize the graph network corresponding to a gremlin query.
+The project forked from https://github.com/prabushitha/gremlin-visualizer
 
 ![alt text](https://raw.githubusercontent.com/prabushitha/Readme-Materials/master/Gremlin-Visualizer.png)
 
@@ -8,7 +9,7 @@ To setup gremlin visualizer, you need to have `node.js` and `npm` installed in y
 
 * Clone the project
 ```sh
-git clone https://github.com/prabushitha/gremlin-visualizer.git
+git clone git@github.com:RecoLabs/gremlin-visualizer.git
 ```
 * Install dependencies
 ```sh
@@ -32,31 +33,34 @@ This will use the current version of the `master` branch of the source GitHub re
 The Docker image can be built by calling the `docker build` command, for example:
 
 ```sh
-docker build --tag=gremlin-visualizer:latest .
-```
-
-The image can also be downloaded from Docker hub: [`prabushitha/gremlin-visualizer:latest`](https://hub.docker.com/r/prabushitha/gremlin-visualizer).
-
-```sh
-docker pull prabushitha/gremlin-visualizer:latest
+docker build --tag=recolabs/gremlin-visualizer:latest .
 ```
 
 The Docker image can then be run by calling `docker run` and exposing the necessary ports for communication. See [Docker's documentation](https://docs.docker.com/engine/reference/commandline/run/) for more options on how to run the image.
 
 ```sh
 # if you built the image yourself
-docker run --rm -d -p 3000:3000 -p 3001:3001 --name=gremlin-visualizer gremlin-visualizer:latest
-# if you downloaded from Docker Hub
-docker run --rm -d -p 3000:3000 -p 3001:3001 --name=gremlin-visualizer prabushitha/gremlin-visualizer:latest
+docker run --rm -d -p 3000:3000 -p 3001:3001 --name=gremlin-visualizer recolabs/gremlin-visualizer:latest
 ```
 
-The Docker container can be stopped by calling `docker stop gremlin-visualizer`.
+The Docker container can be stopped by calling `docker stop recolabs/gremlin-visualizer`.
 
 ### Usage
 * Start Gremlin-Visualizer as mentioned above
 * Start or tunnel a gremlin server
 * Specify the host and port of the gremlin server
 * Write an gremlin query to retrieve a set of nodes (eg. `g.V()`)
+
+### Run query from URL parameters
+Add feature to extract params from the URL.
+http://localhost:3000/index.html?host={host}&port={port}&query=g.V()
+Once the page finishes loading, the query will be executed.
+Params :
+- host: localhost / host.docker.internal
+- port: 8182
+- query: g.V() -> the query to execute
+
+This feature will be used as part of our notebook. We will extract the query from the cell and set it as part of the url.
 
 ### Features
 * If you don't clear the graph and execute another gremlin query, results of previous query and new query will be merged and be shown.
