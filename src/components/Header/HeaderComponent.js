@@ -36,7 +36,18 @@ class Header extends React.Component {
     this.props.dispatch({ type: ACTIONS.SET_QUERY, payload: query });
   }
 
+  componentWillMount () {
+    const windowUrl = window.location.search;
+    const params = new URLSearchParams(windowUrl);
+    console.log(params)
+    console.log(params["host"])
+    this.props.dispatch({ type: ACTIONS.SET_HOST, payload: params.get('host') });
+    this.props.dispatch({ type: ACTIONS.SET_PORT, payload: params.get('port') });
+    this.props.dispatch({ type: ACTIONS.SET_QUERY, payload: params.get('query') });
+  }
+
   render(){
+    this.sendQuery()
     return (
       <div className={'header'}>
         <form noValidate autoComplete="off">
@@ -50,7 +61,6 @@ class Header extends React.Component {
         <br />
         <div style={{color: 'red'}}>{this.props.error}</div>
       </div>
-
     );
   }
 }
