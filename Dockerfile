@@ -1,15 +1,21 @@
-FROM node:10-alpine
+# pull official base image
+FROM node:13.12.0-alpine
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+
+# add app
+COPY . ./
 
 RUN npm cache clean --force && \
 	npm config set strict-ssl false && \
-	apk add wget unzip && \
-	wget --no-check-certificate https://github.com/prabushitha/gremlin-visualizer/archive/master.zip && \
-	unzip master.zip && \
-	cd gremlin-visualizer-master && \
-	npm install
+	npm install react-scripts@3.4.1 -g --silent
 
 EXPOSE 3000 3001
-
-WORKDIR /gremlin-visualizer-master
-
-CMD npm start
+CMD ["npm", "start"]
