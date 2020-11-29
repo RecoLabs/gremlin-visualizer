@@ -33,6 +33,9 @@ This will use the current version of the `master` branch of the source GitHub re
 The Docker image can be built by calling the `docker build` command, for example:
 
 ```sh
+docker pull galnakash/recolabs
+
+#Or
 docker build --tag=recolabs/gremlin-visualizer:latest .
 ```
 
