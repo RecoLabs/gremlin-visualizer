@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import vis from 'vis-network';
 import { ACTIONS } from '../../constants';
-
+import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 class NetworkGraph extends React.Component{
   componentDidMount() {
     const data = {
@@ -28,7 +28,7 @@ class NetworkGraph extends React.Component{
   }
 
   render(){
-    return (<div ref={'myRef'} className={'mynetwork'} />);
+    return (<Print><div ref={'myRef'} className={'mynetwork'} /> </Print>);
   }
 }
 
